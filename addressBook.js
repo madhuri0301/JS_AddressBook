@@ -79,9 +79,25 @@ class AddressBook{
 }
 
 try {
-    let addressBook = new AddressBook("Madhuri","Patil","Gujar Lane","Shahada","Maharashtra","425409","91 9898767898","abcharshu@gmail.com")
-    console.log(addressBook.toString());
+    let addressBookList = new Array();
+    let readline = require('readline-sync');
+    const sizeOfBookStr = readline.question('Enter Size Of Book: ');
+    const sizeOfBook = Number(sizeOfBookStr)
+    let i = 0;
+    while(i<sizeOfBook){
+        firstName = readline.question("Enter First Name: ");
+        lastName = readline.question("Enter Last Name: ");
+        address = readline.question("Enter Address: ");
+        city = readline.question("Enter City: ");
+        state = readline.question("Enter State: ");
+        zip = readline.question("Enter Zip: ");
+        phoneNum = readline.question("Enter Phone Number: ");
+        email =readline.question("Enter Email Address: ");
+        let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNum,email);
+        addressBookList.push(addressBook.toString());
+        i++;
+    }
+    console.log(addressBookList);
 } catch (e) {
     console.error(e)
-
-}
+};
