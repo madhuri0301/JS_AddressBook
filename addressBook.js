@@ -74,7 +74,7 @@ class AddressBook{
     }
 
     toString(){
-        return "FirstName="+this.firstName+", lastName="+this.lastName+", Address="+this.address+", City="+this.city+", State="+this.state+", Zip="+this.zip+", PhoneNo="+this.phoneNum+", Email="+this.email;
+        return "\nFirstName="+this.firstName + ",\nlastName="+this.lastName+", \nAddress="+this.address+",\nCity="+this.city+", \nState="+this.state+", \nZip="+this.zip+", \nPhoneNo="+this.phoneNum+", \nEmail="+this.email;
     }
 }
 const readline = require('readline-sync');
@@ -82,13 +82,16 @@ let flag = true;
 var addressBookList = []
 
 while(flag == true){
-    const option = Number(readline.question("Chosse Your option: \n1.For add new Contact. \n2.Edit Contact Using Name. \nAny Number To Exit" ))
+    const option = Number(readline.question("Chosse Your option: \n1.For add new Contact. \n2.Edit Contact Using Name. \n3. Delete Contact Using Name \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
             break;
         case 2:
             editEntries(addressBookList);
+            break;
+        case 3:
+            deleteEntries(addressBookList);
             break;
         default:
             flag = false;
@@ -97,7 +100,6 @@ while(flag == true){
 
 function addEntries(addressBookList){ 
     try {
-        let readline = require('readline-sync');
         const sizeOfBookStr = readline.question('Enter Size Of Book: ');
         const sizeOfBook = Number(sizeOfBookStr)
         let i = 0;
@@ -109,9 +111,10 @@ function addEntries(addressBookList){
             state = readline.question("Enter State: ");
             zip = readline.question("Enter Zip: ");
             phoneNum = readline.question("Enter Phone Number: ");
-            email =readline.question("Enter Email Address: ");
+            email = readline.question("Enter Email Address: ");
+            
             let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneNum,email);
-            addressBookList.push(addressBook.toString());
+            addressBookList.push(addressBook);
             i++;
         }
         console.log(addressBookList.toString());
@@ -128,14 +131,23 @@ function editEntries(addressBookList){
         try {
             if(element.firstName===name){
                 element.firstName = readline.question("Edit First Name: ")
-            }
-            else{
-                console.log("This name is not exist in the list");
+                console.log(" Data successfully Edited");
             }
         } catch (e) {
             console.error(e)
-        }
-    
+        } 
     });
     console.log(addressBookList.toString());
 }
+
+function deleteEntries(addressBookList){
+    const name = readline.question("Enter Name Which U Want To Delete: ")
+    addressBookList.forEach(element =>{
+        if (element.firstName===name){
+            addressBookList.pop(element);
+            console.log("Data SuccessFully Deleted");
+        }
+    });
+    console.log(addressBookList.toString());
+}
+
