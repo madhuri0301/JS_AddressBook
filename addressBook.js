@@ -74,7 +74,7 @@ class AddressBook{
     }
 
     toString(){
-        return "FirstName="+this.firstName+", lastName="+this.lastName+", Address="+this.address+", City="+this.city+", State="+this.state+", Zip="+this.zip+", PhoneNo="+this.phoneNum+", Email="+this.email;
+        return "\n FirstName="+this.firstName+", \n lastName="+this.lastName+", \n Address="+this.address+", \n City="+this.city+", \n State="+this.state+", \n Zip="+this.zip+", \n PhoneNo="+this.phoneNum+", \n Email="+this.email;
     }
 }
 const readline = require('readline-sync');
@@ -83,7 +83,7 @@ var addressBookList = []
 
 while(flag == true){
     const option = Number(readline.question("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
-                                 "\n4. For Get Number Of Contact In Book \nAny Number To Exit" ))
+                                 "\n4. For Get Number Of Contact In Book \n5. Search Contact By City Or STate \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -97,6 +97,9 @@ while(flag == true){
         case 4:
             sizeOfBook(addressBookList);
             break;
+        case 5:
+                searchContact(addressBookList);
+                break;
         default:
             flag = false;
     }
@@ -167,3 +170,29 @@ function sizeOfBook(addressBookList){
     console.log(`${addressBookList.length} Entries In Our AddressBook`);
 }
 
+function searchContact(addressBookList){
+    console.log("Select Your Option, \n1. Search By City. \n2. Search By State");
+    const option = Number(readline.question("Select Ur Option"))
+    switch(option){
+        case 1:
+            const city = readline.question("Enter Ur City Name: ");
+            filtteredAddressBook = addressBookList.filter(filterValueByCity);
+            
+            function filterValueByCity(element){
+                if(element.city === city)
+                    return element; 
+            }
+            console.log(filtteredAddressBook.toString());
+            break;
+        case 2:
+            const state = readline.question("Enter Ur state Name: ");
+            filtteredAddressBook = addressBookList.filter(filterValueByState);
+            
+            function filterValueByState(element){
+                if(element.state === state)
+                    return element; 
+            }
+            console.log(filtteredAddressBook.toString());
+            break;
+    }
+}
