@@ -74,7 +74,7 @@ class AddressBook{
     }
 
     toString(){
-        return "\n FirstName="+this.firstName+", \n lastName="+this.lastName+", \n Address="+this.address+", \n City="+this.city+", \n State="+this.state+", \n Zip="+this.zip+", \n PhoneNo="+this.phoneNum+", \n Email="+this.email;
+        return "\n FirstName="+this.firstName+", \n lastName="+this.lastName+", \n Address="+this.address+", \n City="+this.city+", \n State="+this.state+", \n Zip="+this.zip+", \n PhoneNo="+this.phoneNum+", \n 5Email="+this.email;
     }
 }
 const readline = require('readline-sync');
@@ -183,6 +183,7 @@ function searchContact(addressBookList){
                     return element; 
             }
             console.log(filtteredAddressBook.toString());
+            console.log(`Number of contact in city ${city} is ${filtteredAddressBook.length}.` );
             break;
         case 2:
             const state = readline.question("Enter Ur state Name: ");
@@ -192,7 +193,8 @@ function searchContact(addressBookList){
                 if(element.state === state)
                     return element; 
             }
-            console.log(filtteredAddressBook.toString());
+            console.log(filtteredAddressBook1.toString());
+            console.log(`Number of contact in city ${city} is ${filtteredAddressBook1.length}.` );
             break;
     }
 }
