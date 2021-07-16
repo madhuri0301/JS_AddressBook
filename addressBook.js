@@ -83,7 +83,7 @@ var addressBookList = []
 
 while(flag == true){
     const option = Number(readline.question("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
-                                 "\n4. For Get Number Of Contact In Book \n5. Search Contact By City Or STate \n6. For Sort List By First Name \nAny Number To Exit" ))
+                                 "\n4. For Get Number Of Contact In Book \n5. Search Contact By City Or STate \n6. For Sort List By First Name \n7.Sort \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -102,6 +102,9 @@ while(flag == true){
                 break;
         case 6:
                 sortByName(addressBookList);
+                break;
+        case 7:
+                sort(addressBookList);
                 break;
         default:
             flag = false;
@@ -172,41 +175,42 @@ function deleteEntries(addressBookList){
 function sizeOfBook(addressBookList){
     console.log(`${addressBookList.length} Entries In Our AddressBook`);
 }
-
-function searchContact(addressBookList){
-    console.log("Select Your Option, \n1. Search By City. \n2. Search By State");
-    const option = Number(readline.question("Select Ur Option"))
+function sortByName(addressBookList){
+    sortList = addressBookList.sort((a,b) => {
+                if(a._firstName<b._firstName) return -1;
+                if(a._firstName>b._firstName) return 1;
+                return 0
+    });
+    console.log(sortList.toString());
+}
+function sort(addressBookList){
+    console.log("Select Sorting Option \n1. sort by City. \n2. sort by State. \n3. sort by Zip");
+    let option = Number(readline.question("select Ur Option: "))
     switch(option){
         case 1:
-            const city = readline.question("Enter Ur City Name: ");
-            filtteredAddressBook = addressBookList.filter(filterValueByCity);
-            
-            function filterValueByCity(element){
-                if(element.city === city)
-                    return element; 
-            }
-            console.log(filtteredAddressBook.toString());
-            console.log(`Number of contact in city ${city} is ${filtteredAddressBook.length}.` );
+            sortListByCity = addressBookList.sort(function(a,b) {
+                if(a._city<b._city) return -1;
+                if(a._city>b._city) return 1;
+                return 0
+            });
+            console.log(sortListByCity.toString());
             break;
         case 2:
-            const state = readline.question("Enter Ur state Name: ");
-            filtteredAddressBook = addressBookList.filter(filterValueByState);
-            
-            function filterValueByState(element){
-                if(element.state === state)
-                    return element; 
-            }
-            console.log(filtteredAddressBook1.toString());
-            console.log(`Number of contact in city ${city} is ${filtteredAddressBook1.length}.` );
+            sortListByState = addressBookList.sort((a,b) => {
+                if(a._state<b._state) return -1;
+                if(a._state>b._state) return 1;
+                return 0
+            });
+            console.log(sortListByState.toString());
+            break;
+        case 3:
+            sortListByZip = addressBookList.sort((a,b) => {
+                if(a._zip<b._zip) return -1;
+                if(a._zip>b._zip) return 1;
+                return 0
+            });
+            console.log(sortListByZip.toString());
             break;
     }
 }
-    function sortByName(addressBookList){
-    sortList = addressBookList.sort((a,b) => {
-              if(a._firstName<b._firstName) return -1;
-              if(a._firstName>b._firstName) return 1;
-              return 0
-    });
-     console.log(sortList.toString());
-1}
 
