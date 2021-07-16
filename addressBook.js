@@ -74,7 +74,7 @@ class AddressBook{
     }
 
     toString(){
-        return "\n FirstName="+this.firstName+", \n lastName="+this.lastName+", \n Address="+this.address+", \n City="+this.city+", \n State="+this.state+", \n Zip="+this.zip+", \n PhoneNo="+this.phoneNum+", \n 5Email="+this.email;
+        return "\n FirstName="+this.firstName+", \n lastName="+this.lastName+", \n A7ddress="+this.address+", \n City="+this.city+", \n State="+this.state+", \n Zip="+this.zip+", \n PhoneNo="+this.phoneNum+", \n 5Email="+this.email;
     }
 }
 const readline = require('readline-sync');
@@ -83,7 +83,7 @@ var addressBookList = []
 
 while(flag == true){
     const option = Number(readline.question("Chosse Your option: \n1. For add new Contact. \n2. Edit Contact Using Name. \n3. Delete Contact Using Name"+
-                                 "\n4. For Get Number Of Contact In Book \n5. Search Contact By City Or STate \nAny Number To Exit" ))
+                                 "\n4. For Get Number Of Contact In Book \n5. Search Contact By City Or STate \n6. For Sort List By First Name \nAny Number To Exit" ))
     switch(option){
         case 1:
             addEntries(addressBookList);
@@ -99,6 +99,9 @@ while(flag == true){
             break;
         case 5:
                 searchContact(addressBookList);
+                break;
+        case 6:
+                sortByName(addressBookList);
                 break;
         default:
             flag = false;
@@ -198,3 +201,12 @@ function searchContact(addressBookList){
             break;
     }
 }
+    function sortByName(addressBookList){
+    sortList = addressBookList.sort((a,b) => {
+              if(a._firstName<b._firstName) return -1;
+              if(a._firstName>b._firstName) return 1;
+              return 0
+    });
+     console.log(sortList.toString());
+1}
+
